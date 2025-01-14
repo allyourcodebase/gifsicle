@@ -25,5 +25,8 @@ jobs:
       - name: Set up Zig
         uses: mlugg/setup-zig@v1
 
-      - name: Run `build`
+      - name: Run `build` with only library
+        run: zig build -Dtools=false
+
+      - name: Run `build` with tools
         run: zig build
