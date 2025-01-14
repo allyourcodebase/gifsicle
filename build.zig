@@ -27,7 +27,8 @@ pub fn build(b: *std.Build) !void {
     const is32Bit = t.ptrBitWidth() == 32;
     const isWindows = t.os.tag == .windows;
 
-    const haveX11 = !isWindows;
+    const systemX11 = b.systemIntegrationOption("X11", .{ .default = true });
+    const haveX11 = !isWindows or systemX11;
 
     const terminalAvailable = true;
 
@@ -99,7 +100,14 @@ pub fn build(b: *std.Build) !void {
     gifview.linkLibrary(lib);
     // gifview.addConfigHeader(config_h);
     gifview.addCSourceFiles(.{ .root = gifsicle_upstream.path("."), .files = &gifview_sources });
-    gifview.linkSystemLibrary2("X11", .{});
+    if (systemX11) {
+        gifview.linkSystemLibrary2("X11", .{});
+    } else {
+        if (b.lazyDependency("X11.zig", .{})) |X11_dep| {
+            gifview.linkLibrary(X11_dep.artifact("X11"));
+            gifview.installLibraryHeaders(X11_dep.artifact("X11"));
+        }
+    }
     gifview.root_module.addCMacro("HAVE_CONFIG_H", "1");
 
     const gifdiff = b.addExecutable(.{

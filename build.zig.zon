@@ -6,6 +6,11 @@
             .url = "git+https://github.com/kohler/gifsicle#338d286490750a4cc1ba728ddd4588bf46027ff7",
             .hash = "1220302d0f524e4bc79680ed325da880732b381e6e0de2580452d4b333406985ad10",
         },
+        .@"X11.zig" = .{
+            .url = "git+https://github.com/tiawl/X11.zig#db0e5f978ad3fdd618bfc4ba772f3191b14d5fb3",
+            .hash = "1220623782f90d17318e707661bb01e6f84dd0ffd7f4aeff31fbe462b6c4001a9074",
+            .lazy = true,
+        },
     },
     .paths = .{
         "build.zig",
