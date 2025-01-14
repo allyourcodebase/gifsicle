@@ -27,13 +27,15 @@ pub fn build(b: *std.Build) !void {
     const is32Bit = t.ptrBitWidth() == 32;
     const isWindows = t.os.tag == .windows;
 
+    const haveX11 = !isWindows;
+
     const terminalAvailable = true;
 
     // std.Target.x86.featureSetHas(t.getCpuFeatures(), .simd);
     const config_h = b.addConfigHeader(.{ .style = .{ .cmake = b.path("winconf.h.in") }, .include_path = "config.h" }, .{
         .GIF_ALLOCATOR_DEFINED = 1,
         .HAVE_INT64_T = 1,
-        .X_DISPLAY_MISSING = @intFromBool(isWindows),
+        .X_DISPLAY_MISSING = @intFromBool(!haveX11),
         .HAVE_MKSTEMP = @intFromBool(!isWindows),
         .HAVE_POW = 1,
         .HAVE_STRERROR = 1,
@@ -114,7 +116,7 @@ pub fn build(b: *std.Build) !void {
         b.installArtifact(gifsicle);
 
         if (!dynamic) {
-            if (!isWindows) b.installArtifact(gifview);
+            if (haveX11) b.installArtifact(gifview);
             b.installArtifact(gifdiff);
         }
     }
