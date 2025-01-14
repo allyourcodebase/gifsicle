@@ -5,16 +5,18 @@ pub fn build(b: *std.Build) !void {
     const optimize = b.standardOptimizeOption(.{});
 
     const build_tools = b.option(bool, "tools", "Build the gifsicle tools") orelse true;
+    const dynamic = b.option(bool, "dynamic", "Build dynamic library") orelse false;
 
     const gifsicle_upstream = b.dependency("gifsicle_upstream", .{});
 
-    const lib = b.addStaticLibrary(.{
+    const lib_config = .{
         .name = "gifsicle",
         .target = target,
         .optimize = optimize,
         .link_libc = true,
         .pic = true,
-    });
+    };
+    const lib = if (dynamic) b.addSharedLibrary(lib_config) else b.addStaticLibrary(lib_config);
 
     lib.addIncludePath(gifsicle_upstream.path("include"));
 
@@ -110,8 +112,11 @@ pub fn build(b: *std.Build) !void {
 
     if (build_tools) {
         b.installArtifact(gifsicle);
-        if (!isWindows) b.installArtifact(gifview);
-        b.installArtifact(gifdiff);
+
+        if (!dynamic) {
+            if (!isWindows) b.installArtifact(gifview);
+            b.installArtifact(gifdiff);
+        }
     }
 }
 
