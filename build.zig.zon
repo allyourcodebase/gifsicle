@@ -1,0 +1,19 @@
+.{
+    .name = "libgifsicle",
+    .version = "1.94.0+x",
+    .dependencies = .{
+        .gifsicle_upstream = .{
+            .url = "git+https://github.com/kohler/gifsicle#338d286490750a4cc1ba728ddd4588bf46027ff7",
+            .hash = "1220302d0f524e4bc79680ed325da880732b381e6e0de2580452d4b333406985ad10",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "winconf.h.in",
+        "COPYING",
+        "README.md",
+        "src",
+        "include",
+    },
+}
