@@ -17,6 +17,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up X11 for gifview
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-dev
+
       - name: Set up Zig
         uses: mlugg/setup-zig@v1
 
