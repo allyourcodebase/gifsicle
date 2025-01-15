@@ -1,6 +1,6 @@
 .{
     .name = "libgifsicle",
-    .version = "1.94.0+x",
+    .version = "1.95.0+x",
     .dependencies = .{
         .gifsicle_upstream = .{
             .url = "git+https://github.com/kohler/gifsicle#338d286490750a4cc1ba728ddd4588bf46027ff7",

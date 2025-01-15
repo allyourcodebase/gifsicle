@@ -20,7 +20,7 @@ pub fn build(b: *std.Build) !void {
 
     lib.addIncludePath(gifsicle_upstream.path("include"));
 
-    const version = "1.94-zig"; // TODO: import version
+    const version = "1.95-zig"; // TODO: import version
 
     const t = lib.rootModuleTarget();
 
