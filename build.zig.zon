@@ -11,9 +11,7 @@
         "build.zig",
         "build.zig.zon",
         "winconf.h.in",
-        "COPYING",
+        "LICENSE",
         "README.md",
-        "src",
-        "include",
     },
 }
