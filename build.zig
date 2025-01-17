@@ -6,6 +6,7 @@ pub fn build(b: *std.Build) !void {
 
     const build_tools = b.option(bool, "tools", "Build the gifsicle tools") orelse true;
     const dynamic = b.option(bool, "dynamic", "Build dynamic library") orelse false;
+    const terminalAvailable = b.option(bool, "terminal", "Output gif to terminal") orelse true;
 
     const gifsicle_upstream = b.dependency("gifsicle_upstream", .{});
 
@@ -28,8 +29,6 @@ pub fn build(b: *std.Build) !void {
     const isWindows = t.os.tag == .windows;
 
     const haveX11 = !isWindows;
-
-    const terminalAvailable = true;
 
     // std.Target.x86.featureSetHas(t.getCpuFeatures(), .simd);
     const config_h = b.addConfigHeader(.{ .style = .{ .cmake = b.path("winconf.h.in") }, .include_path = "config.h" }, .{

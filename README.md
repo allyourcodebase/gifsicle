@@ -12,6 +12,7 @@ or when building directly with `zig build -Doption=value`
 |-----------|:-----:|----------------------------------------------|
 | dynamic   | false | Build lib as shared (dynamic library)        |
 | tools     | true  | Build cli tools (gifsicle, gifview, gifdiff) |
+| terminal  | true  | Output gif to terminal                       |
 
 ---
 
