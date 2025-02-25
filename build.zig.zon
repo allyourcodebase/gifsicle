@@ -3,8 +3,8 @@
     .version = "1.95.0+x",
     .dependencies = .{
         .gifsicle_upstream = .{
-            .url = "git+https://github.com/kohler/gifsicle#v1.95",
-            .hash = "12202e39640027a2c375edb39c72fe36140319373d2561b11c1815f71591ffb489e0",
+            .url = "git+https://github.com/kohler/gifsicle#f9d506080182472c95d1f567c7498c1f3d35cb32",
+            .hash = "12202052bbfdc784bb3a6b1532227d11bbaf65f1d0bef0a63e186c060a2ff0033062",
         },
     },
     .paths = .{
