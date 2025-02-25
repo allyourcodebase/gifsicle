@@ -133,7 +133,6 @@ const gifsicle_sources = [_][]const u8{
     "src/quantize.c",
     "src/support.c",
     "src/xform.c",
-    "src/kcolor.c",
 };
 
 const gifview_sources = [_][]const u8{
