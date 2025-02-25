@@ -41,7 +41,7 @@ pub fn build(b: *std.Build) !void {
         .HAVE_STRTOUL = 1,
         .HAVE_UINT64_T = 1, // search for unused types
         .HAVE_UINTPTR_T = 1,
-        .OUTPUT_GIF_TO_TERMINAL = if (terminalAvailable) null else 1,
+        .OUTPUT_GIF_TO_TERMINAL = if (terminalAvailable) null else @as(?u1, 1),
         .ENABLE_THREADS = @intFromBool(!isWindows), // pthread.h not on windows
         .HAVE_SIMD = 1, // TODO: check target and enable as needed
         .HAVE_VECTOR_SIZE_VECTOR_TYPES = 1,
