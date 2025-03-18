@@ -6,8 +6,8 @@
     .version = "1.96.0+zig",
     .dependencies = .{
         .gifsicle_upstream = .{
-            .url = "git+https://github.com/kohler/gifsicle#a08e0f6686d467bb8b9e4715b1f1835f12984fb0",
-            .hash = "N-V-__8AAPDfEQDO3npRsPFLZNy-9c13A9yiyCNIyM0Txap3",
+            .url = "git+https://github.com/kohler/gifsicle#ed5b01816b42423e0ae6897cad0149cda561898c",
+            .hash = "N-V-__8AAC7iEQDSmeSIIN39pYpLM37G5auku7jmD1RoqsH0",
         },
     },
     .paths = .{
