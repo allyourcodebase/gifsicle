@@ -1,10 +1,13 @@
 .{
-    .name = "libgifsicle",
-    .version = "1.95.0+x",
+    .name = .libgifsicle,
+    .fingerprint = 0x32de99cb4801f9a4,
+    .minimum_zig_version = "0.14.0",
+
+    .version = "1.96.0+zig",
     .dependencies = .{
         .gifsicle_upstream = .{
-            .url = "git+https://github.com/kohler/gifsicle#f9d506080182472c95d1f567c7498c1f3d35cb32",
-            .hash = "12202052bbfdc784bb3a6b1532227d11bbaf65f1d0bef0a63e186c060a2ff0033062",
+            .url = "git+https://github.com/kohler/gifsicle#a08e0f6686d467bb8b9e4715b1f1835f12984fb0",
+            .hash = "N-V-__8AAPDfEQDO3npRsPFLZNy-9c13A9yiyCNIyM0Txap3",
         },
     },
     .paths = .{

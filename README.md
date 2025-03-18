@@ -2,6 +2,8 @@
 
 This is [gifsicle](https://github.com/kohler/gifsicle) packaged using Zig build system
 
+needs zig version `0.14.0` or higher
+
 
 ## Options
 

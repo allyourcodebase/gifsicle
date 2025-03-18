@@ -10,18 +10,21 @@ pub fn build(b: *std.Build) !void {
 
     const gifsicle_upstream = b.dependency("gifsicle_upstream", .{});
 
-    const lib_config = .{
-        .name = "gifsicle",
+    const lib_mod = b.createModule(.{
         .target = target,
         .optimize = optimize,
         .link_libc = true,
         .pic = true,
-    };
-    const lib = if (dynamic) b.addSharedLibrary(lib_config) else b.addStaticLibrary(lib_config);
+    });
+    const lib = b.addLibrary(.{
+        .name = "gifsicle",
+        .root_module = lib_mod,
+        .linkage = if (dynamic) .dynamic else .static,
+    });
 
-    lib.addIncludePath(gifsicle_upstream.path("include"));
+    lib_mod.addIncludePath(gifsicle_upstream.path("include"));
 
-    const version = "1.95-zig"; // TODO: import version
+    const version = "1.96-zig"; // TODO: import version
 
     const t = lib.rootModuleTarget();
 
