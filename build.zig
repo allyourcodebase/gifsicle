@@ -84,9 +84,11 @@ pub fn build(b: *std.Build) !void {
 
     const gifsicle = b.addExecutable(.{
         .name = "gifsicle-cli",
-        .target = target,
-        .optimize = optimize,
-        .link_libc = true,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+            .link_libc = true,
+        }),
     });
     gifsicle.linkLibrary(lib);
     // gifsicle.addConfigHeader(config_h);
@@ -94,9 +96,11 @@ pub fn build(b: *std.Build) !void {
 
     const gifview = b.addExecutable(.{
         .name = "gifview-cli",
-        .target = target,
-        .optimize = optimize,
-        .link_libc = true,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+            .link_libc = true,
+        }),
     });
     gifview.linkLibrary(lib);
     // gifview.addConfigHeader(config_h);
@@ -106,9 +110,11 @@ pub fn build(b: *std.Build) !void {
 
     const gifdiff = b.addExecutable(.{
         .name = "gifdiff-cli",
-        .target = target,
-        .optimize = optimize,
-        .link_libc = true,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+            .link_libc = true,
+        }),
     });
     gifdiff.linkLibrary(lib);
     // gifdiff.addConfigHeader(config_h);
