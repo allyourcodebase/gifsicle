@@ -8,7 +8,7 @@ pub fn build(b: *std.Build) !void {
     const version = std.SemanticVersion.parse(versionString) catch @panic("OOM");
 
     const build_tools = b.option(bool, "tools", "Build the gifsicle tools") orelse true;
-    const dynamic = b.option(bool, "dynamic", "Build dynamic library") orelse false;
+    const linkage = b.option(std.builtin.LinkMode, "linkage", "Link mode for the library") orelse .static;
     const terminalAvailable = b.option(bool, "terminal", "Output gif to terminal") orelse true;
 
     const gifsicle_upstream = b.dependency("gifsicle_upstream", .{});
@@ -23,7 +23,7 @@ pub fn build(b: *std.Build) !void {
         .name = "gifsicle",
         .root_module = lib_mod,
         .version = version,
-        .linkage = if (dynamic) .dynamic else .static,
+        .linkage = linkage,
     });
 
     lib_mod.addIncludePath(gifsicle_upstream.path("include"));
@@ -125,7 +125,7 @@ pub fn build(b: *std.Build) !void {
     if (build_tools) {
         b.installArtifact(gifsicle);
 
-        if (!dynamic) {
+        if (linkage == .static) {
             if (haveX11) b.installArtifact(gifview);
             b.installArtifact(gifdiff);
         }
