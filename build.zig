@@ -4,6 +4,9 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const versionString = @import("./build.zig.zon").version;
+    const version = std.SemanticVersion.parse(versionString) catch @panic("OOM");
+
     const build_tools = b.option(bool, "tools", "Build the gifsicle tools") orelse true;
     const dynamic = b.option(bool, "dynamic", "Build dynamic library") orelse false;
     const terminalAvailable = b.option(bool, "terminal", "Output gif to terminal") orelse true;
@@ -19,12 +22,11 @@ pub fn build(b: *std.Build) !void {
     const lib = b.addLibrary(.{
         .name = "gifsicle",
         .root_module = lib_mod,
+        .version = version,
         .linkage = if (dynamic) .dynamic else .static,
     });
 
     lib_mod.addIncludePath(gifsicle_upstream.path("include"));
-
-    const version = "1.96-zig"; // TODO: import version
 
     const t = lib.rootModuleTarget();
 
@@ -67,7 +69,7 @@ pub fn build(b: *std.Build) !void {
         .GIF_FREE = "free",
         .IS_WINDOWS = @intFromBool(isWindows),
 
-        .VERSION = version,
+        .VERSION = versionString, // b.fmt("{f}", .{version}),
     });
 
     lib.root_module.addCMacro("HAVE_CONFIG_H", "1");
