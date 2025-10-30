@@ -10,6 +10,19 @@ on:
   workflow_dispatch:
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Zig
+        uses: mlugg/setup-zig@v2
+
+      - name: Check Formatting
+        run: zig fmt --ast-check --check .
+
   build:
     strategy:
       fail-fast: false
@@ -28,9 +41,6 @@ jobs:
         uses: mlugg/setup-zig@v2
         with:
           version: ${{ matrix.zig-version }}
-
-      - name: Check Formatting
-        run: zig fmt --ast-check --check .
 
       - name: Build
         run: zig build -Dtools=false --summary all
