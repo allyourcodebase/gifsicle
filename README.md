@@ -2,7 +2,7 @@
 
 This is [gifsicle](https://github.com/kohler/gifsicle) packaged using Zig build system
 
-needs zig version `0.15.1` or higher
+Needs zig version `0.15.2` or higher
 
 
 ## Options
@@ -18,4 +18,4 @@ or when building directly with `zig build -Doption=value`
 
 ---
 
-Thanks to andrew's fork of [ffmpeg](https://github.com/andrewrk/ffmpeg) for the knowhow
+Thanks to Andrew's fork of [ffmpeg](https://github.com/andrewrk/ffmpeg) for the knowhow

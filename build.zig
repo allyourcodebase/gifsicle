@@ -92,9 +92,9 @@ pub fn build(b: *std.Build) !void {
             .link_libc = true,
         }),
     });
-    gifsicle.linkLibrary(lib);
-    gifsicle.addConfigHeader(config_h);
-    gifsicle.addCSourceFile(.{ .file = gifsicle_upstream.path("src/gifsicle.c"), .flags = &.{} });
+    gifsicle.root_module.linkLibrary(lib);
+    gifsicle.root_module.addConfigHeader(config_h);
+    gifsicle.root_module.addCSourceFile(.{ .file = gifsicle_upstream.path("src/gifsicle.c"), .flags = &.{} });
 
     const gifview = b.addExecutable(.{
         .name = "gifview-cli",
@@ -104,10 +104,10 @@ pub fn build(b: *std.Build) !void {
             .link_libc = true,
         }),
     });
-    gifview.linkLibrary(lib);
-    gifview.addConfigHeader(config_h);
-    gifview.addCSourceFiles(.{ .root = gifsicle_upstream.path("."), .files = &gifview_sources });
-    gifview.linkSystemLibrary2("X11", .{});
+    gifview.root_module.linkLibrary(lib);
+    gifview.root_module.addConfigHeader(config_h);
+    gifview.root_module.addCSourceFiles(.{ .root = gifsicle_upstream.path("."), .files = &gifview_sources });
+    gifview.root_module.linkSystemLibrary("X11", .{});
     gifview.root_module.addCMacro("HAVE_CONFIG_H", "1");
 
     const gifdiff = b.addExecutable(.{
@@ -118,9 +118,9 @@ pub fn build(b: *std.Build) !void {
             .link_libc = true,
         }),
     });
-    gifdiff.linkLibrary(lib);
-    gifdiff.addConfigHeader(config_h);
-    gifdiff.addCSourceFile(.{ .file = gifsicle_upstream.path("src/gifdiff.c"), .flags = &.{} });
+    gifdiff.root_module.linkLibrary(lib);
+    gifdiff.root_module.addConfigHeader(config_h);
+    gifdiff.root_module.addCSourceFile(.{ .file = gifsicle_upstream.path("src/gifdiff.c"), .flags = &.{} });
 
     if (build_tools) {
         b.installArtifact(gifsicle);
