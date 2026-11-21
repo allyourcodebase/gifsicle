@@ -3,11 +3,11 @@
     .fingerprint = 0x32de99cb4801f9a4,
     .minimum_zig_version = "0.15.2",
 
-    .version = "1.96.0+zig",
+    .version = "1.98.0+zig",
     .dependencies = .{
         .gifsicle_upstream = .{
-            .url = "git+https://github.com/kohler/gifsicle#ed5b01816b42423e0ae6897cad0149cda561898c",
-            .hash = "N-V-__8AAC7iEQDSmeSIIN39pYpLM37G5auku7jmD1RoqsH0",
+            .url = "https://github.com/kohler/gifsicle/archive/refs/tags/v1.98.tar.gz",
+            .hash = "N-V-__8AAPhEFAAxaEfGcIymO1aAhIg-V1-9Qly6ZrDHUkok",
         },
     },
     .paths = .{
